@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly - Connect with the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header/Navigation -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-layer-group"></i>
+                <h1>Stackly</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Stackly...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <a href="#" data-section="explore"><i class="fas fa-compass"></i> Explore</a>
+                <a href="#" data-section="notifications"><i class="fas fa-bell"></i> Notifications</a>
+                <a href="#" data-section="messages"><i class="fas fa-envelope"></i> Messages</a>
+                <div class="dropdown">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic">
+                    <div class="dropdown-content">
+                        <a href="#" data-section="profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" data-section="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Sidebar -->
+            <aside class="left-sidebar">
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="profile-img">
+                    <h3>John Doe</h3>
+                    <p>@johndoe</p>
+                    <div class="profile-stats">
+                        <div>
+                            <span>245</span>
+                            <span>Posts</span>
+                        </div>
+                        <div>
+                            <span>1.2k</span>
+                            <span>Followers</span>
+                        </div>
+                        <div>
+                            <span>543</span>
+                            <span>Following</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending">
+                    <h3>Trending Today</h3>
+                    <ul>
+                        <li>#StacklyLaunch</li>
+                        <li>#WebDevelopment</li>
+                        <li>#TechNews</li>
+                        <li>#DesignInspiration</li>
+                        <li>#Programming</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Feed Sections -->
+            <!-- Home Feed (Default Visible) -->
+            <section class="feed active-section" id="home-feed">
+                <!-- Your existing home feed content -->
+                 <div class="create-post">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="profile-img">
+            <input type="text" placeholder="What's on your mind?" id="post-content">
+            <div class="post-actions">
+                <button id="photo-btn"><i class="fas fa-image"></i> Photo</button>
+                <button id="video-btn"><i class="fas fa-video"></i> Video</button>
+                <button id="location-btn"><i class="fas fa-map-marker-alt"></i> Location</button>
+                <button id="post-btn">Post</button>
+            </div>
+            
+            <!-- Photo Upload Section (hidden by default) -->
+            <div id="photo-upload" class="upload-section" style="display: none;">
+                <div class="upload-header">
+                    <h4>Add Photos</h4>
+                    <button class="close-upload">&times;</button>
+                </div>
+                <div class="upload-content">
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop photos here or click to browse</p>
+                        <input type="file" id="photo-input" accept="image/*" multiple>
+                    </div>
+                    <div class="photo-preview" id="photo-preview"></div>
+                </div>
+                <div class="upload-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="confirm-btn">Add Photos</button>
+                </div>
+            </div>
+            
+            <!-- Video Upload Section (hidden by default) -->
+            <div id="video-upload" class="upload-section" style="display: none;">
+                <div class="upload-header">
+                    <h4>Add Video</h4>
+                    <button class="close-upload">&times;</button>
+                </div>
+                <div class="upload-content">
+                    <div class="upload-area">
+                        <i class="fas fa-video"></i>
+                        <p>Drag & drop video here or click to browse</p>
+                        <input type="file" id="video-input" accept="video/*">
+                    </div>
+                    <div class="video-preview" id="video-preview"></div>
+                    <div class="video-caption">
+                        <input type="text" placeholder="Add a caption for your video...">
+                    </div>
+                </div>
+                <div class="upload-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="confirm-btn">Add Video</button>
+                </div>
+            </div>
+            
+            <!-- Location Section (hidden by default) -->
+            <div id="location-select" class="upload-section" style="display: none;">
+                <div class="upload-header">
+                    <h4>Add Location</h4>
+                    <button class="close-upload">&times;</button>
+                </div>
+                <div class="upload-content">
+                    <div class="location-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search for a location...">
+                    </div>
+                    <div class="location-map">
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=40.7128,-74.0060&zoom=12&size=600x300&maptype=roadmap&key=YOUR_API_KEY" alt="Map">
+                    </div>
+                    <div class="recent-locations">
+                        <h5>Recent Locations</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> Central Park, New York</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Times Square, Manhattan</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Brooklyn Bridge, NYC</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="upload-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="confirm-btn">Add Location</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="posts">
+            <!-- Post 1 - Multiple Photos -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="profile-img">
+                    <div class="post-user">
+                        <h4>Emma Watson</h4>
+                        <p>@emmawatson · 1h ago · <i class="fas fa-map-marker-alt"></i> Malibu Beach</p>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    <p>Beautiful day at the beach! 🌊☀️ #summer #vacation</p>
+                    <div class="photo-grid">
+                        <img src="https://cdn.pixabay.com/photo/2020/05/25/15/55/selfie-5219202_640.jpg" alt="Beach" class="post-image">
+                        <img src="https://cdn.pixabay.com/photo/2021/05/29/03/00/beach-6292382_640.jpg" alt="Ocean" class="post-image">
+                        <img src="https://cdn.pixabay.com/photo/2024/12/20/18/31/sunset-9280759_640.jpg" alt="Sunset" class="post-image">
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="like-btn"><i class="far fa-heart"></i> <span>342</span></button>
+                    <button class="comment-btn"><i class="far fa-comment"></i> <span>56</span></button>
+                    <button class="share-btn"><i class="far fa-share-square"></i> <span>Share</span></button>
+                </div>
+                <div class="comments-section">
+                    <div class="comment">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Sophia Turner <span>@sophiat · 45m ago</span></h5>
+                            <p>Looks amazing! Which beach is this?</p>
+                            <button class="like-btn"><i class="far fa-heart"></i> 12</button>
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="profile-img">
+                        <input type="text" placeholder="Write a comment...">
+                        <button class="post-comment-btn">Post</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 - Video Post -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User" class="profile-img">
+                    <div class="post-user">
+                        <h4>Chris Evans</h4>
+                        <p>@chrisevans · 3h ago · <i class="fas fa-map-marker-alt"></i> Yosemite National Park</p>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    <p>Check out this amazing drone footage I captured last weekend! #drone #nature</p>
+                    <div class="video-container">
+                        <video controls poster="https://source.unsplash.com/random/800x450/?nature">
+                            <source src="https://cdn.pixabay.com/video/2020/04/07/35264-407130725_tiny.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="like-btn"><i class="far fa-heart"></i> <span>512</span></button>
+                    <button class="comment-btn"><i class="far fa-comment"></i> <span>87</span></button>
+                    <button class="share-btn"><i class="far fa-share-square"></i> <span>Share</span></button>
+                </div>
+                <div class="comments-section">
+                    <div class="comment">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Robert Downey <span>@robertd · 2h ago</span></h5>
+                            <p>Incredible footage! What drone are you using?</p>
+                            <button class="like-btn"><i class="far fa-heart"></i> 8</button>
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="profile-img">
+                        <input type="text" placeholder="Write a comment...">
+                        <button class="post-comment-btn">Post</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 3 - Location Check-in -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="profile-img">
+                    <div class="post-user">
+                        <h4>Jessica Parker</h4>
+                        <p>@jessicap · 5h ago · <i class="fas fa-map-marker-alt"></i> The Metropolitan Museum of Art</p>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    <p>Spent the day exploring this incredible museum! So much art and history in one place. 🎨🏛️ #art #museum</p>
+                    <div class="location-checkin">
+                        <img src="https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_640.jpg" alt="Met Museum Location">
+                        <div class="location-info">
+                            <h5>The Metropolitan Museum of Art</h5>
+                            <p>1000 5th Ave, New York, NY 10028</p>
+                            <p><i class="fas fa-star"></i> 4.8 (12,345 reviews)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="like-btn"><i class="far fa-heart"></i> <span>289</span></button>
+                    <button class="comment-btn"><i class="far fa-comment"></i> <span>42</span></button>
+                    <button class="share-btn"><i class="far fa-share-square"></i> <span>Share</span></button>
+                </div>
+                <div class="comments-section">
+                    <div class="comment">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Sarah Johnson <span>@sarahj · 4h ago</span></h5>
+                            <p>I was there last month! Did you see the new exhibition?</p>
+                            <button class="like-btn"><i class="far fa-heart"></i> 5</button>
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="profile-img">
+                        <input type="text" placeholder="Write a comment...">
+                        <button class="post-comment-btn">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            </section>
+
+            <!-- Explore Section (Hidden by Default) -->
+            <section class="feed" id="explore-feed">
+                <!-- Your existing explore feed content -->
+                   <div class="explore-header">
+                    <h2>Explore</h2>
+                    <div class="explore-tabs">
+                        <button class="active">Trending</button>
+                        <button>News</button>
+                        <button>Sports</button>
+                        <button>Entertainment</button>
+                    </div>
+                </div>
+
+                <div class="explore-content">
+                    <div class="trending-posts">
+                        <div class="trending-post">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="profile-img">
+                                <div class="post-user">
+                                    <h4>Tech News Daily</h4>
+                                    <p>@technews · 2h ago</p>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>Breaking: New AI technology can now generate realistic videos from text prompts. #AI #Tech</p>
+                                <img src="https://cdn.pixabay.com/photo/2019/07/14/16/27/pen-4337521_640.jpg" alt="AI Tech" class="post-image">
+                            </div>
+                            <div class="post-actions">
+                                <button class="like-btn"><i class="far fa-heart"></i> <span>1.5k</span></button>
+                                <button class="comment-btn"><i class="far fa-comment"></i> <span>324</span></button>
+                            </div>
+                        </div>
+
+                        <div class="trending-post">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="profile-img">
+                                <div class="post-user">
+                                    <h4>Sports Central</h4>
+                                    <p>@sportscentral · 4h ago</p>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>Historic win for Team USA in the World Championships! 🏆 #Sports #Champions</p>
+                                <img src="https://cdn.pixabay.com/photo/2016/11/22/23/44/porsche-1851246_640.jpg" alt="Sports" class="post-image">
+                            </div>
+                            <div class="post-actions">
+                                <button class="like-btn"><i class="far fa-heart"></i> <span>3.2k</span></button>
+                                <button class="comment-btn"><i class="far fa-comment"></i> <span>876</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trending-topics">
+                        <h3>Trending Topics</h3>
+                        <div class="topic">
+                            <h4>#WorldCup2023</h4>
+                            <p>1.2M posts</p>
+                        </div>
+                        <div class="topic">
+                            <h4>#TechConference</h4>
+                            <p>856K posts</p>
+                        </div>
+                        <div class="topic">
+                            <h4>#NewMovieRelease</h4>
+                            <p>723K posts</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications Section (Hidden by Default) -->
+            <section class="feed" id="notifications-feed">
+                <!-- Your existing notifications feed content -->
+                  <div class="notifications-header">
+                    <h2>Notifications</h2>
+                    <div class="notification-tabs">
+                        <button class="active">All</button>
+                        <button>Mentions</button>
+                        <button>Reactions</button>
+                    </div>
+                </div>
+
+                <div class="notifications-list">
+                    <div class="notification">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="profile-img">
+                        <div class="notification-content">
+                            <p><strong>Sophia Turner</strong> liked your post</p>
+                            <span>2 minutes ago</span>
+                        </div>
+                    </div>
+
+                    <div class="notification">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="profile-img">
+                        <div class="notification-content">
+                            <p><strong>Tom Hanks</strong> started following you</p>
+                            <span>15 minutes ago</span>
+                        </div>
+                        <button class="follow-back">Follow back</button>
+                    </div>
+
+                    <div class="notification">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="profile-img">
+                        <div class="notification-content">
+                            <p><strong>Emma Watson</strong> mentioned you in a comment: "Great point @johndoe!"</p>
+                            <span>1 hour ago</span>
+                        </div>
+                    </div>
+
+                    <div class="notification">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User" class="profile-img">
+                        <div class="notification-content">
+                            <p><strong>Chris Evans</strong> shared your post</p>
+                            <span>3 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section (Hidden by Default) -->
+            <section class="feed" id="messages-feed">
+                <!-- Your existing messages feed content -->
+                   <div class="messages-header">
+                    <h2>Messages</h2>
+                    <button class="new-message"><i class="fas fa-plus"></i> New Message</button>
+                </div>
+
+                <div class="messages-container">
+                    <div class="conversations-list">
+                        <div class="conversation active">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="profile-img">
+                            <div class="conversation-info">
+                                <h4>Emma Watson</h4>
+                                <p>Hey, how are you doing?</p>
+                                <span>2m ago</span>
+                            </div>
+                        </div>
+
+                        <div class="conversation">
+                            <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User" class="profile-img">
+                            <div class="conversation-info">
+                                <h4>Chris Evans</h4>
+                                <p>About the meeting tomorrow...</p>
+                                <span>1h ago</span>
+                            </div>
+                        </div>
+
+                        <div class="conversation">
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="profile-img">
+                            <div class="conversation-info">
+                                <h4>Sophia Turner</h4>
+                                <p>Did you see the new movie?</p>
+                                <span>3h ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-view">
+                        <div class="message-header">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="profile-img">
+                            <h4>Emma Watson</h4>
+                            <div class="message-actions">
+                                <button><i class="fas fa-phone"></i></button>
+                                <button><i class="fas fa-video"></i></button>
+                                <button><i class="fas fa-ellipsis-h"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="message-history">
+                            <div class="message received">
+                                <p>Hey John! How are you doing?</p>
+                                <span>2:30 PM</span>
+                            </div>
+                            <div class="message sent">
+                                <p>I'm doing great! Just working on that project we discussed.</p>
+                                <span>2:32 PM</span>
+                            </div>
+                            <div class="message received">
+                                <p>That's awesome! Let me know if you need any help.</p>
+                                <span>2:33 PM</span>
+                            </div>
+                        </div>
+
+                        <div class="message-input">
+                            <input type="text" placeholder="Type a message...">
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section (Hidden by Default) -->
+            <section class="feed" id="profile-feed">
+                <div class="profile-header">
+                    <div class="cover-photo">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/27/18/54/technology-1283624_640.jpg" alt="Cover">
+                        <div class="profile-actions">
+                            <button class="edit-profile">Edit Profile</button>
+                            <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img-large">
+                        <h2>John Doe</h2>
+                        <p>@johndoe</p>
+                        <p class="bio">Web Developer | UI/UX Designer | Coffee Enthusiast</p>
+                        <div class="profile-details">
+                            <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                            <span><i class="fas fa-link"></i> johndoe.dev</span>
+                            <span><i class="far fa-calendar-alt"></i> Joined June 2018</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="posts">Posts</button>
+                    <button class="tab-btn" data-tab="media">Media</button>
+                    <button class="tab-btn" data-tab="likes">Likes</button>
+                </div>
+                <div class="profile-posts">
+                    <div class="post">
+                        <p>Just launched my new portfolio website! Check it out at johndoe.dev</p>
+                        <span class="post-date">2 hours ago</span>
+                    </div>
+                    <div class="post">
+                        <p>Working on a new UI kit for designers. What features would you like to see?</p>
+                        <span class="post-date">1 day ago</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section (Hidden by Default) -->
+            <section class="feed" id="settings-feed">
+                <h2>Account Settings</h2>
+                <div class="settings-tabs">
+                    <button class="settings-tab active" data-tab="account">Account</button>
+                    <button class="settings-tab" data-tab="privacy">Privacy</button>
+                    <button class="settings-tab" data-tab="notifications">Notifications</button>
+                </div>
+                <div class="settings-panel" id="account-settings">
+                    <h3>Edit Profile</h3>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" value="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" value="@johndoe">
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea>Web Developer | UI/UX Designer | Coffee Enthusiast</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" value="San Francisco, CA">
+                        </div>
+                        <div class="form-group">
+                            <label>Website</label>
+                            <input type="url" value="johndoe.dev">
+                        </div>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Logout Section (Hidden by Default) -->
+            <section class="feed" id="logout-feed">
+  <div class="logout-confirm">
+    <h2>Logout</h2>
+    <p>Are you sure you want to logout of your Stackly account?</p>
+
+    <div class="logout-actions">
+      <button class="cancel-logout" id="cancelLogoutBtn">
+        <i class="fas fa-times"></i> Cancel
+      </button>
+      <button class="confirm-logout" id="confirmLogoutBtn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+
+    <div class="logout-warning" id="logoutWarning" style="display: none;">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>You have been logged out successfully.</span>
+    </div>
+  </div>
+</section>
+
+
+            <!-- Right Sidebar -->
+            <aside class="right-sidebar">
+                <div class="friend-requests">
+                    <h3>Friend Requests</h3>
+                    <div class="request">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Emma Stone</h5>
+                            <div class="request-actions">
+                                <button class="accept-btn">Accept</button>
+                                <button class="decline-btn">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="request">
+                        <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Robert Smith</h5>
+                            <div class="request-actions">
+                                <button class="accept-btn">Accept</button>
+                                <button class="decline-btn">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="suggestions">
+                    <h3>People You May Know</h3>
+                    <div class="suggestion">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Lisa Ray</h5>
+                            <p>5 mutual friends</p>
+                            <button class="add-btn">Add Friend</button>
+                        </div>
+                    </div>
+                    <div class="suggestion">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="profile-img">
+                        <div>
+                            <h5>Tom Hanks</h5>
+                            <p>2 mutual friends</p>
+                            <button class="add-btn">Add Friend</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+    <script src="script.js"></script>
+
+    
+</body>
+</html>
